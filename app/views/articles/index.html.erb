@@ -1,0 +1,10 @@
+<h1>All Articles</h1>
+<% @articles.each do |article| %>
+    <dl>
+      <dt><%= article.title %></dt>
+      <dd><%= article.text %></dd>
+      <dd><%= link_to 'Show', article_path(article) %></dd>
+    </tr>
+  <% end %>
+<p><%= link_to 'New', new_article_path %></p>
+<p><%= link_to 'Home', root_path %></p>
