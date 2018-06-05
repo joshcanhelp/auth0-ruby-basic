@@ -1,7 +1,15 @@
-<h1>Title: <%= @article.title %></h1>
+<h1><%= @article.title %></h1>
 <p><%= @article.text %></p>
-<p><%= link_to 'Edit', edit_article_path(@article) %></p>
-<p><%= link_to 'Delete', article_path(@article),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></p>
-<p><%= link_to 'All Articles', controller: 'articles' %></p>
+<hr>
+<p>
+  <%= link_to '← All Articles',
+        {controller: 'articles', action: 'index'},
+        class: 'btn btn-default' %>
+  <%= link_to 'Edit →',
+        edit_article_path(@article),
+        class: 'btn btn-primary' %>
+  <%= link_to '✕ Delete', article_path(@article),
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger' %>
+</p>

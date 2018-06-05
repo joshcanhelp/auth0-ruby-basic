@@ -12,18 +12,19 @@
       </ul>
   <% end %>
 
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
+  <div class="form-group">
+    <%= form.label :title, class: 'control-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
 
-  <p>
-    <%= form.label :text %><br>
-    <%= form.text_area :text %>
-  </p>
+  <div class="form-group">
+    <%= form.label :text, class: 'control-label' %>
+    <%= form.text_area :text, class: 'form-control' %>
+  </div>
 
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="form-group">
+    <%= link_to '← Cancel', articles_path, class: 'btn btn-default' %>
+    <%= form.submit '+ Save Changes', :class => 'btn btn-primary' %>
+  </div>
 
 <% end %>
