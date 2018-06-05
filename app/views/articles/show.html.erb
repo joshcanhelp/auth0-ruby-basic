@@ -1,5 +1,17 @@
 <h1><%= @article.title %></h1>
+
 <p><%= @article.text %></p>
+<hr>
+
+<% if @article.comments.any? %>
+  <h3>Comments</h3>
+  <% @article.comments.each do |comment| %>
+    <%= render @article.comments %>
+  <% end %>
+<% end %>
+
+<h3>Something to Say?</h3>
+<%= render 'comments/form' %>
 <hr>
 <p>
   <%= link_to '← All Articles',

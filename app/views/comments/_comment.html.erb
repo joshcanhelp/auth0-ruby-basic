@@ -1,0 +1,9 @@
+<dl class="comment">
+  <dt><%= comment.commenter %></dt>
+  <dd><%= comment.body %></dd>
+  <dd><%= link_to 'Delete',
+            [comment.article, comment],
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'btn btn-danger btn-sm' %></dd>
+</dl>

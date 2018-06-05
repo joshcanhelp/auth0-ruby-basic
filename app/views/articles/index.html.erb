@@ -1,6 +1,6 @@
 <h1>All Articles</h1>
 <% @articles.each do |article| %>
-    <dl>
+    <dl class="article--listing">
       <dt><%= article.title %></dt>
       <dd><%= article.text %></dd>
       <dd><%= link_to 'View →', article_path(article), class: 'btn btn-default btn-sm' %></dd>

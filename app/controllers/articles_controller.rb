@@ -16,6 +16,7 @@ class ArticlesController < ApplicationController
 
   #
   # Single Article view handler
+  #
   def show
     @article = Article.find(params[:id])
   end
@@ -63,6 +64,9 @@ class ArticlesController < ApplicationController
   #
   private
 
+    #
+    # Require and permit Article parameters
+    #
     def article_params
       params.require(:article).permit(:title, :text)
     end
