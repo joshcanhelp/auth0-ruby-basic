@@ -21,6 +21,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  #
+  # All Articles view handler
+  #
   def index
     @articles = Article.all
   end
@@ -68,6 +71,6 @@ class ArticlesController < ApplicationController
     # Require and permit Article parameters
     #
     def article_params
-      params.require(:article).permit(:title, :text)
+      params.require(:article).permit(:title, :text, :user_id)
     end
 end

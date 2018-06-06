@@ -40,11 +40,6 @@ dt {
   font-weight: normal;
 }
 
-.comment dt {
-  font-size: 1.25em;
-  margin: 0 0 0.15em;
-}
-
 dd {
   margin: 0 0 1em;
 }

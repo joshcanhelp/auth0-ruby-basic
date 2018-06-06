@@ -1,0 +1,23 @@
+<% if notice %>
+    <div class="alert alert-default"><%= notice %></div>
+<% end %>
+
+<h1>All Users</h1>
+
+<% if @users.any? %>
+<% @users.each do |user| %>
+  <dl class="user--listing">
+    <dt><%= user.name %></dt>
+    <dd><%= user.auth0_id %></dd>
+    <dd><%= user.email %></dd>
+    <dd><%= link_to 'View →', user, class: 'btn btn-default btn-sm' %></dd>
+  </dl>
+<% end %>
+<% else %>
+<p><em>No users found!</em></p>
+<% end %>
+
+<p>
+  <%= link_to '← Home', root_path, class: 'btn btn-default' %>
+  <%= link_to '+ New', new_user_path, class: 'btn btn-primary' %>
+</p>

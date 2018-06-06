@@ -1,10 +1,10 @@
 <%= form_with(model: @article, local: true) do |form| %>
 
   <% if @article.errors.any? %>
-      <h2>
+      <h4>
         <%= pluralize(@article.errors.count, "error") %> prohibited
         this article from being saved:
-      </h2>
+      </h4>
       <ul>
         <% @article.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -20,6 +20,12 @@
   <div class="form-group">
     <%= form.label :text, class: 'control-label' %>
     <%= form.text_area :text, class: 'form-control' %>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :user_id, class: 'control-label' %>
+    <%= form.text_field :user_id, class: 'form-control' %>
   </div>
 
   <div class="form-group">

@@ -1,0 +1,29 @@
+<% if notice %>
+    <div class="alert alert-default"><%= notice %></div>
+<% end %>
+
+<h1><%= @user.name %></h1>
+
+<p>
+  <strong>Email:</strong><br>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Auth0:</strong><br>
+  <%= @user.auth0_id %>
+</p>
+
+<hr>
+<p>
+  <%= link_to '← All Users',
+        users_path,
+        class: 'btn btn-default' %>
+  <%= link_to 'Edit →',
+        edit_user_path(@user),
+        class: 'btn btn-primary' %>
+  <%= link_to '✕ Delete', user_path(@user),
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger' %>
+</p>
