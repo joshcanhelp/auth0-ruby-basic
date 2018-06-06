@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  root 'static_pages#home'
+  get 'static_pages/home'
+  get 'static_pages/help'
+  get 'static_pages/about'
+
   # Users Resource
   resources :users
 
@@ -9,7 +14,4 @@ Rails.application.routes.draw do
     # Comments Resource
     resources :comments
   end
-
-  # Root requests
-  root 'welcome#index'
 end
