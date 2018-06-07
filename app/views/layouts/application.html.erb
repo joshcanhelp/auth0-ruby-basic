@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %> | Basic Auth0 Ruby App</title>
+    <title><%= meta_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag 'https://cdn.auth0.com/styleguide/core/2.0.5/core.min.css' %>
