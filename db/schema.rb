@@ -10,32 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606201842) do
+ActiveRecord::Schema.define(version: 20180605171645) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "text"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
     t.text "body"
     t.integer "article_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.string "auth0_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["auth0_id"], name: "index_users_on_auth0_id", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

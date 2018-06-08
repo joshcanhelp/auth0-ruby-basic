@@ -27,6 +27,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :password_confirmation, class: 'control-label' %>
+    <%= form.text_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :auth0_id, 'Auth0 ID', class: 'control-label' %>
     <%= form.text_field :auth0_id, id: :user_auth0_id, class: 'form-control' %>
   </div>
