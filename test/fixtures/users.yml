@@ -3,17 +3,17 @@
 one:
   name: Sensitive Sandwich
   email: sensitive@sandwich.org
-  password_digest: i7kBoaYUWM9HjT8Ru43Z
+  password_digest: <%= User.digest('i7kBoaYU') %>
   auth0_id: auth0|wgdJ6h6A3ZGMQA7XH2Vx
 
 two:
   name: Nervous Nelly
   email: nervous@nelly.org
-  password_digest: XNPU426zTkstggz8LX6p
+  password_digest: <%= User.digest('i7kBoaYU') %>
   auth0_id: auth0|i7kBoaYUWM9HjT8Ru43Z
 
 three:
   name: Anxious Andrew
   email: anxious@andrew.org
-  password_digest: wgdJ6h6A3ZGMQA7XH2Vx
+  password_digest: <%= User.digest('i7kBoaYU') %>
   auth0_id: auth0|XNPU426zTkstggz8LX6p

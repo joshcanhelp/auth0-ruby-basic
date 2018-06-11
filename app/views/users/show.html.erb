@@ -6,7 +6,7 @@
 
 <p>
   <strong>Email:</strong> <%= @user.email %>
-  <% if @user.auth0_id %>
+  <% if !@user.auth0_id.blank? %>
   <br><strong>Auth0:</strong> <%= @user.auth0_id %>
   <% end %>
 </p>

@@ -37,13 +37,14 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        log_in @user
         format.html {
           redirect_to @user,
           notice: @is_signup_page ? 'Success!' : 'Welcome!'
         }
         format.json { render :show, status: :created, location: @user }
       else
-        # TODO: this is not working as expected ... 
+        # TODO: this is not working as expected ...
         format.html { render @is_signup_page ? :signup : :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params.except(:is_signup_page))
         format.html {
           redirect_to @user,
           notice: 'User was successfully updated.'

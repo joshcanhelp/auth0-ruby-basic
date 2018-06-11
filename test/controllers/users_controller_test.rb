@@ -3,7 +3,7 @@ require 'json'
 
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  setup do
+  def setup
     @user = users(:one)
   end
 
@@ -30,22 +30,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should get edit" do
     get edit_user_url(@user)
     assert_response :success
-  end
-
-  test "should create user" do
-    assert_difference('User.count') do
-      post users_url, params: {
-        user: {
-          name: @user.name,
-          email: 'unique1' + @user.email,
-          password: @user.password_digest,
-          password_confirmation: @user.password_digest,
-          auth0_id: 'unique1' + @user.auth0_id
-        }
-      }
-    end
-
-    assert_redirected_to user_url(User.last)
   end
 
   test "should reject different passwords" do

@@ -9,9 +9,11 @@
   <dl class="user--listing">
     <dt><%= user.name %></dt>
     <dd>
-      <strong>ID:</strong> <%= user.id %><br>
-      <strong>Email:</strong> <%= user.email %><br>
-      <strong>Auth0 ID:</strong> <%= user.auth0_id %>
+      <strong>ID:</strong> <%= user.id %>
+      <br><strong>Email:</strong> <%= user.email %>
+      <% if !user.auth0_id.blank? %>
+      <br><strong>Auth0:</strong> <%= user.auth0_id %>
+      <% end %>
     </dd>
     <dd>
       <%= link_to 'View →', user, class: 'btn btn-default btn-sm' %>
