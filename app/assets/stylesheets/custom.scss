@@ -1,0 +1,38 @@
+body {
+  background: #E3E5E7;
+}
+
+section {
+
+  &.main {
+    background: white;
+    padding: 2em;
+    max-width: 700px;
+    margin: 2em auto;
+
+    h1 {
+      margin: 0.25em 0 1em;
+    }
+  }
+}
+
+dl {
+  margin: 0 0 1.5em;
+  padding: 0 0 0.5em;
+  border-bottom: 1px solid #EEE
+}
+
+dt {
+  font-size: 1.5em;
+  margin: 0 0 0.25em;
+  font-weight: normal;
+}
+
+dd {
+  margin: 0 0 1em;
+}
+
+.debug_dump {
+  padding: 5%;
+  margin: 2em 0 0;
+}

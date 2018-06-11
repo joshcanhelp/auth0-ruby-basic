@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # debugger
   end
 
   # GET /users/new
@@ -17,21 +18,33 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # GET /signup
+  def signup
+    @user = User.new
+    @is_signup_page = true
+  end
+
   # GET /users/1/edit
   def edit
+    @is_edit_page = true
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.except(:is_signup_page))
+    @is_signup_page = user_params[:is_signup_page]
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html {
+          redirect_to @user,
+          notice: @is_signup_page ? 'Success!' : 'Welcome!'
+        }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
+        # TODO: this is not working as expected ... 
+        format.html { render @is_signup_page ? :signup : :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +55,10 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html {
+          redirect_to @user,
+          notice: 'User was successfully updated.'
+        }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -69,6 +85,13 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :auth0_id)
+      params.require(:user).permit(
+        :name,
+        :email,
+        :password,
+        :password_confirmation,
+        :auth0_id,
+        :is_signup_page
+      )
     end
 end

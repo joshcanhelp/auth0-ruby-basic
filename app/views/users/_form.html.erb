@@ -1,14 +1,16 @@
 <%= form_with(model: @user, local: true) do |form| %>
   <% if @user.errors.any? %>
-      <h4>
-        <%= pluralize(@user.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h4>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <div class="alert alert-danger">
+    <h4>
+      <%= pluralize(@user.errors.count, "error") %>
+      prohibited this user from being saved:
+    </h4>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
 
   <div class="form-group">
@@ -18,26 +20,39 @@
 
   <div class="form-group">
     <%= form.label :email, class: 'control-label' %>
-    <%= form.text_field :email, id: :user_email, class: 'form-control' %>
+    <%= form.email_field :email, id: :user_email, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :password, class: 'control-label' %>
-    <%= form.text_field :password, id: :user_password, class: 'form-control' %>
+    <%= form.password_field :password, id: :user_password, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :password_confirmation, class: 'control-label' %>
-    <%= form.text_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
+    <%= form.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
   </div>
 
+  <% if !@is_signup_page %>
   <div class="form-group">
     <%= form.label :auth0_id, 'Auth0 ID', class: 'control-label' %>
     <%= form.text_field :auth0_id, id: :user_auth0_id, class: 'form-control' %>
   </div>
+  <% end %>
+
+  <% if !@is_signup_page %>
+  <%= form.hidden_field :is_signup_page, :value => 1 %>
+  <% end %>
 
   <div class="form-group">
     <%= link_to '← Cancel', users_path, class: 'btn btn-default' %>
+    <% if @is_signup_page %>
+    <%= form.submit '+ Signup', :class => 'btn btn-primary' %>
+    <% elsif  @is_edit_page %>
     <%= form.submit '+ Save Changes', :class => 'btn btn-primary' %>
+    <% else %>
+    <%= form.submit '+ Create User', :class => 'btn btn-primary' %>
+    <% end %>
+
   </div>
 <% end %>

@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180605171645) do
     t.string "auth0_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auth0_id"], name: "index_users_on_auth0_id", unique: true
+    t.index ["auth0_id"], name: "index_users_on_auth0_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

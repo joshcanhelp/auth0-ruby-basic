@@ -20,8 +20,7 @@ class User < ApplicationRecord
     length: { minimum: 8 }
 
   validates :auth0_id,
-    presence: true,
     length: { maximum: 255 },
-    uniqueness: true
+    uniqueness: {allow_blank: true}
 
 end

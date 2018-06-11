@@ -1,17 +1,14 @@
 <% if notice %>
-    <div class="alert alert-default"><%= notice %></div>
+    <div class="alert alert-success"><%= notice %></div>
 <% end %>
 
-<h1><%= @user.name %></h1>
+<h1><%= gravatar_for @user, size: 60 %> <%= @user.name %></h1>
 
 <p>
-  <strong>Email:</strong><br>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Auth0:</strong><br>
-  <%= @user.auth0_id %>
+  <strong>Email:</strong> <%= @user.email %>
+  <% if @user.auth0_id %>
+  <br><strong>Auth0:</strong> <%= @user.auth0_id %>
+  <% end %>
 </p>
 
 <hr>

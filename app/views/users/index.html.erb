@@ -8,9 +8,14 @@
 <% @users.each do |user| %>
   <dl class="user--listing">
     <dt><%= user.name %></dt>
-    <dd><%= user.auth0_id %></dd>
-    <dd><%= user.email %></dd>
-    <dd><%= link_to 'View →', user, class: 'btn btn-default btn-sm' %></dd>
+    <dd>
+      <strong>ID:</strong> <%= user.id %><br>
+      <strong>Email:</strong> <%= user.email %><br>
+      <strong>Auth0 ID:</strong> <%= user.auth0_id %>
+    </dd>
+    <dd>
+      <%= link_to 'View →', user, class: 'btn btn-default btn-sm' %>
+    </dd>
   </dl>
 <% end %>
 <% else %>

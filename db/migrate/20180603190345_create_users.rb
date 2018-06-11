@@ -10,6 +10,6 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     end
 
     add_index :users, :email, unique: true
-    add_index :users, :auth0_id, unique: true
+    add_index :users, :auth0_id
   end
 end
