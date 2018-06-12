@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605171645) do
+ActiveRecord::Schema.define(version: 20180612175739) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 20180605171645) do
     t.string "auth0_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remember_digest"
+    t.boolean "is_admin", default: false
+    t.boolean "is_author", default: false
     t.index ["auth0_id"], name: "index_users_on_auth0_id"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.users {
+
+  &--list {
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+.user {
+
+  &--listing {
+    margin: 0 0 1em;
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+}
+
 img.gravatar {
   display: inline-block;
   vertical-align: middle;

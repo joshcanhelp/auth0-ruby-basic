@@ -42,6 +42,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not logged_in?
     assert_redirected_to root_url
+
+    # Simulate a user clicking logout in a second window.
+    delete logout_path
+
     follow_redirect!
 
     # Non-auth links showing, auth links gone?

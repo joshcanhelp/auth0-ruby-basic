@@ -5,34 +5,32 @@ require 'json'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:one)
+    @user2 = users(:two)
+    @admin = users(:admin)
   end
 
-  test "should get index" do
-    get users_url
-    assert_response :success
+  test 'should redirect index when not logged in' do
+    get users_path
+    assert_not flash.empty?
+    assert_redirected_to login_url
   end
 
-  test "should get new user page" do
+  test 'should get new user page' do
     get new_user_url
     assert_response :success
   end
 
-  test "should get signup page" do
+  test 'should get signup page' do
     get signup_path
     assert_response :success
   end
 
-  test "should show user" do
+  test 'should show user' do
     get user_url(@user)
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_user_url(@user)
-    assert_response :success
-  end
-
-  test "should reject different passwords" do
+  test 'should reject different passwords on create' do
     assert_no_difference('User.count') do
       post users_url, params: {
         user: {
@@ -47,7 +45,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should reject duplicate emails" do
+  test 'should reject duplicate emails on create' do
     assert_no_difference('User.count') do
       post users_url, params: {
         user: {
@@ -62,7 +60,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should reject short passwords" do
+  test 'should reject short passwords on create' do
     assert_no_difference('User.count') do
       post users_url, params: {
         user: {
@@ -77,7 +75,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should reject duplicate auth0 IDs" do
+  test 'should reject duplicate auth0 IDs on create' do
     assert_no_difference('User.count') do
       post users_url, params: {
         user: {
@@ -92,24 +90,21 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should update user" do
-    patch user_url(@user), params: {
+  test 'should redirect edit when not logged in' do
+    get edit_user_path(@user)
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test 'should redirect update when not logged in' do
+    patch user_path(@user), params: {
       user: {
-        name: @user.name,
-        email: @user.email,
-        password: @user.password_digest,
-        password_confirmation: @user.password_digest,
-        auth0_id: @user.auth0_id
+        name: "Add #{@user.name}",
+        email: "add+#{@user.email}"
       }
     }
-    assert_redirected_to user_url(@user)
+    assert_not flash.empty?
+    assert_redirected_to login_url
   end
-
-  test "should destroy user" do
-    assert_difference('User.count', -1) do
-      delete user_url(@user)
-    end
-
-    assert_redirected_to users_url
-  end
+  
 end

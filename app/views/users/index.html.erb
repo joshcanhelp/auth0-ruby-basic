@@ -5,21 +5,15 @@
 <h1>All Users</h1>
 
 <% if @users.any? %>
-<% @users.each do |user| %>
-  <dl class="user--listing">
-    <dt><%= user.name %></dt>
-    <dd>
-      <strong>ID:</strong> <%= user.id %>
-      <br><strong>Email:</strong> <%= user.email %>
-      <% if !user.auth0_id.blank? %>
-      <br><strong>Auth0:</strong> <%= user.auth0_id %>
-      <% end %>
-    </dd>
-    <dd>
-      <%= link_to 'View →', user, class: 'btn btn-default btn-sm' %>
-    </dd>
-  </dl>
-<% end %>
+
+<%= will_paginate %>
+
+<ul class="users--list">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
+
 <% else %>
 <p><em>No users found!</em></p>
 <% end %>

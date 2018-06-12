@@ -2,7 +2,7 @@
     <div class="alert alert-success"><%= notice %></div>
 <% end %>
 
-<h1><%= gravatar_for @user, size: 60 %> <%= @user.name %></h1>
+<h1><%= gravatar_for @user, size: 80 %> <%= @user.name %></h1>
 
 <p>
   <strong>Email:</strong> <%= @user.email %>
@@ -13,14 +13,22 @@
 
 <hr>
 <p>
+  <% if current_user %>
   <%= link_to '← All Users',
         users_path,
         class: 'btn btn-default' %>
+  <% end %>
+
+  <% if current_user && ( current_user.is_admin || current_user?(@user) ) %>
   <%= link_to 'Edit →',
         edit_user_path(@user),
         class: 'btn btn-primary' %>
+  <% end %>
+
+  <% if current_user && current_user.is_admin %>
   <%= link_to '✕ Delete', user_path(@user),
         method: :delete,
         data: { confirm: 'Are you sure?' },
         class: 'btn btn-danger' %>
+  <% end %>
 </p>

@@ -4,16 +4,39 @@ one:
   name: Sensitive Sandwich
   email: sensitive@sandwich.org
   password_digest: <%= User.digest('i7kBoaYU') %>
-  auth0_id: auth0|wgdJ6h6A3ZGMQA7XH2Vx
+  auth0_id: auth0|8yBJMQk7ozqq8e6xjNY2
 
 two:
   name: Nervous Nelly
   email: nervous@nelly.org
   password_digest: <%= User.digest('i7kBoaYU') %>
-  auth0_id: auth0|i7kBoaYUWM9HjT8Ru43Z
+  auth0_id: auth0|kn3A3CaZ2Ggwz3NC4uEC
 
 three:
   name: Anxious Andrew
   email: anxious@andrew.org
   password_digest: <%= User.digest('i7kBoaYU') %>
-  auth0_id: auth0|XNPU426zTkstggz8LX6p
+  auth0_id: auth0|27t2JbvzneuFDkT8zG3A
+
+admin:
+  name: Belligerent Bethany
+  email: belligerent@bethany.org
+  password_digest: <%= User.digest('i7kBoaYU') %>
+  auth0_id: auth0|P4jaJHXeHAu22Lnc46ax
+  is_admin: true
+  is_author: true
+
+author:
+  name: Cantancerous Cody
+  email: cantancerous@cody.org
+  password_digest: <%= User.digest('i7kBoaYU') %>
+  auth0_id: auth0|6Hwn92Nbcvz8faFWDxX6
+  is_admin: false
+  is_author: true
+
+<% 20.times do |n| %>
+user_<%= n %>:
+  name:  <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('i7kBoaYU') %>
+<% end %>
