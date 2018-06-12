@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test 'logged out user cannot create an article' do
+    
+  end
 end

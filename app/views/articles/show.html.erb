@@ -1,25 +1,15 @@
 <h1><%= @article.title %></h1>
-
+<p>
+  <strong>Written by:</strong>
+  <code><%= link_to @author.name, @author %></code>
+</p>
 <p><%= @article.text %></p>
 <hr>
-
-<% if @article.comments.any? %>
-  <h3>Comments!</h3>
-  <%= render @article.comments %>
-<% end %>
-
-<h3>Something to Say?</h3>
-<%= render 'comments/form' %>
-<hr>
+<%= render 'comments' %>
 <p>
-  <%= link_to '← All Articles',
-        {controller: 'articles', action: 'index'},
-        class: 'btn btn-default' %>
-  <%= link_to 'Edit →',
-        edit_article_path(@article),
-        class: 'btn btn-primary' %>
-  <%= link_to '✕ Delete', article_path(@article),
-        method: :delete,
-        data: { confirm: 'Are you sure?' },
-        class: 'btn btn-danger' %>
+  <%= render 'index_button' %>
+  <% if current_user?(@author) %>
+    <%= render 'edit_button' %>
+    <%= render 'delete_button' %>
+  <% end %>
 </p>

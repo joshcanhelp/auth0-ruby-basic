@@ -35,3 +35,14 @@ User.create!(
   is_admin: true,
   is_author: true
 )
+
+20.times do |n|
+  name  = Faker::Name.name
+  email = "example-#{n+1}@auth0.com"
+  password = 'i7kBoaYU'
+  Article.create!(
+    title: Faker::Lorem.sentence,
+    text: Faker::Lorem.paragraph(2),
+    user_id: User.all.shuffle.last.id
+  )
+end

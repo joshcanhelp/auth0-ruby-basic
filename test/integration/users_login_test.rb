@@ -41,7 +41,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # Log out
     delete logout_path
     assert_not logged_in?
-    assert_redirected_to root_url
+    assert_not flash.empty?
+    assert_redirected_to login_url
 
     # Simulate a user clicking logout in a second window.
     delete logout_path

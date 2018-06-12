@@ -8,5 +8,7 @@
 <% end %>
 <p>
   <%= link_to '← Home', root_path, class: 'btn btn-default' %>
+  <% if current_user && current_user.is_author %>
   <%= link_to '+ New', new_article_path, class: 'btn btn-primary' %>
+  <% end %>
 </p>

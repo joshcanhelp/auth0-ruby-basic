@@ -1,8 +1,8 @@
 require 'test_helper'
 require 'json'
 
-
 class UsersControllerTest < ActionDispatch::IntegrationTest
+
   def setup
     @user = users(:one)
     @user2 = users(:two)
@@ -13,11 +13,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_path
     assert_not flash.empty?
     assert_redirected_to login_url
-  end
-
-  test 'should get new user page' do
-    get new_user_url
-    assert_response :success
   end
 
   test 'should get signup page' do
@@ -106,5 +101,5 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to login_url
   end
-  
+
 end

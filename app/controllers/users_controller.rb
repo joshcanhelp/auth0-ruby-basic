@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :correct_user]
-  before_action :logged_in, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in, only: [:index, :edit, :update, :destroy, :new]
   before_action :correct_user, only: [:edit, :update]
-  before_action :is_admin, only: [:destroy]
+  before_action :is_admin, only: [:destroy, :new]
 
   # GET /users
   def index
@@ -61,45 +61,11 @@ class UsersController < ApplicationController
   end
 
   #
-  # START - Before filters
-  #
-
-  # Make sure the user is logged in.
-  def logged_in
-    unless logged_in?
-      store_forwarding_loc
-      flash[:danger] = 'Login required.'
-      redirect_to login_url
-    end
-  end
-
-  # Make sure we have the correct user.
-  def correct_user
-    unless current_user.is_admin || current_user?(@user)
-      flash[:danger] = 'Not authorized.'
-      redirect_to users_path
-    end
-  end
-
-  # Make sure we have the correct user.
-  def is_admin
-    unless current_user.is_admin
-      flash[:danger] = 'Not authorized.'
-      redirect_to users_url
-    end
-  end
-
-  #
   # START - Private methods
   #
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Require User params, whitelist incoming
     def user_params
       params.require(:user).permit(
         :name,
@@ -110,4 +76,39 @@ class UsersController < ApplicationController
         :is_signup_page
       )
     end
+
+    #
+    # START - Before filters
+    #
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Make sure the user is logged in.
+    def logged_in
+      unless logged_in?
+        store_forwarding_loc
+        flash[:danger] = 'Login required.'
+        redirect_to login_url
+      end
+    end
+
+    # Make sure we have the correct user.
+    def correct_user
+      unless current_user.is_admin || current_user?(@user)
+        flash[:danger] = 'Not authorized.'
+        redirect_to users_path
+      end
+    end
+
+    # Make sure we have an admin.
+    def is_admin
+      unless current_user.is_admin
+        flash[:danger] = 'Not authorized.'
+        redirect_to users_url
+      end
+    end
+
 end
