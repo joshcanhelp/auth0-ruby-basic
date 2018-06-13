@@ -27,8 +27,6 @@
       <%= form.label :auth0_id, 'Auth0 ID', class: 'control-label' %>
       <%= form.text_field :auth0_id, id: :user_auth0_id, class: 'form-control' %>
     </div>
-  <% else %>
-    <%= form.hidden_field :is_signup_page, :value => 1 %>
   <% end %>
 
   <div class="form-group">

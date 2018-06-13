@@ -20,7 +20,7 @@
       <%= render 'shared/edit_button', path: edit_user_path(@user) %>
     <% end %>
 
-    <% if current_user_is_admin? %>
+    <% if current_user_is_admin? && !current_user?(@user) %>
       <%= render 'shared/delete_button', path: user_path(@user) %>
     <% end %>
 

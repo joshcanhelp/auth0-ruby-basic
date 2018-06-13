@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore local Auth0 gem
+/vendor/auth0/
+
 # Ignore bundler config.
 /.bundle
 

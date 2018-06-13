@@ -60,4 +60,10 @@ module SessionsHelper
   def store_forwarding_loc
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  def get_state
+    state = SecureRandom.hex(24)
+    session['omniauth.state'] = state
+    state
+  end
 end

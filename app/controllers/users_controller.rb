@@ -18,34 +18,26 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /signup
-  def signup
-    @user = User.new
-    @is_signup_page = true
-  end
-
   # GET /users/1/edit
   def edit
-    @is_edit_page = true
   end
 
   # POST /users
   def create
-    @is_signup_page = user_params[:is_signup_page]
-    @user = User.new(user_params.except(:is_signup_page))
+    @user = User.new(user_params)
 
     if @user.save
       log_in @user
-      flash[:success] = @is_signup_page ? 'Success!' : 'Welcome!'
+      flash[:success] = 'User created!'
       redirect_to @user
     else
-      render @is_signup_page ? 'signup' : 'new'
+      render 'new'
     end
   end
 
   # PATCH/PUT /users/1
   def update
-    if @user.update_attributes(user_params.except(:is_signup_page))
+    if @user.update_attributes(user_params)
       flash[:success] = 'Updated!'
       redirect_to @user
     else
@@ -72,8 +64,7 @@ class UsersController < ApplicationController
         :email,
         :password,
         :password_confirmation,
-        :auth0_id,
-        :is_signup_page
+        :auth0_id
       )
     end
 

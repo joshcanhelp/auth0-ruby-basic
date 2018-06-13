@@ -20,5 +20,7 @@
 
 <p>
   <%= render 'shared/home_button' %>
+  <% if current_user_is_admin? %>
   <%= render 'shared/new_button', path: new_user_path %>
+  <% end %>
 </p>

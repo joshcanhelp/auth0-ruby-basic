@@ -47,8 +47,12 @@ gem 'faker'
 # Pagination
 gem 'will_paginate'
 
+# Use OmniAuth for authentication tasks
+gem 'omniauth', '~> 1.6.1'
+gem 'omniauth-auth0', '~> 2.0.0'
+
 # Use Auth0 Ruby SDK for authentication
-gem 'auth0', github: 'auth0/ruby-auth0', branch: 'master'
+gem 'auth0'
 
 
 
