@@ -15,10 +15,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
-  test 'should get signup page' do
-    get signup_path
-    assert_response :success
-  end
+  # test 'should get signup page' do
+  #   get signup_path
+  #   assert_response :success
+  # end
 
   test 'should show user' do
     get user_url(@user)
