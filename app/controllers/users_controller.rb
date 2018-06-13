@@ -97,7 +97,7 @@ class UsersController < ApplicationController
 
     # Make sure we have the correct user.
     def correct_user
-      unless current_user.is_admin || current_user?(@user)
+      unless current_user_is_admin? || current_user?(@user)
         flash[:danger] = 'Not authorized.'
         redirect_to users_path
       end
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
 
     # Make sure we have an admin.
     def is_admin
-      unless current_user.is_admin
+      unless current_user_is_admin?
         flash[:danger] = 'Not authorized.'
         redirect_to users_url
       end

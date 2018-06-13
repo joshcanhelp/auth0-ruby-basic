@@ -3,38 +3,28 @@ class ArticlesController < ApplicationController
   before_action :is_author, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  #
-  # New Article view handler
-  #
-  def new
-    @article = Article.new
+  # GET /articles
+  def index
+    @articles = Article.all
   end
 
-  #
-  # Edit Article view handler
-  #
-  def edit
-
-  end
-
-  #
-  # Single Article view handler
-  #
+  # GET /articles/1
   def show
     store_forwarding_loc
     @author = User.find_by(id: @article.user_id)
   end
 
-  #
-  # All Articles view handler
-  #
-  def index
-    @articles = Article.all
+  # GET /articles/new
+  def new
+    @article = Article.new
   end
 
-  #
-  # Create Article endpoint handler
-  #
+  # GET /articles/1/edit
+  def edit
+  end
+
+
+  # POST /articles
   def create
     @article = Article.new(
       title: article_params[:title],
@@ -48,9 +38,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  #
-  # Update Article endpoint handler
-  #
+  # PATCH/PUT /articles/1
   def update
     if @article.update(article_params)
       redirect_to @article
@@ -59,9 +47,8 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # Delete Article endpoint handler
+  # DELETE /articles/1
   def destroy
-
     @article.destroy
     redirect_to articles_path
   end
@@ -87,7 +74,7 @@ class ArticlesController < ApplicationController
 
     # Make sure we have an author.
     def is_author
-      unless logged_in? && current_user.is_author
+      unless logged_in? && current_user_is_author?
         flash[:danger] = 'Not authorized.'
         redirect_to articles_url
       end
@@ -95,7 +82,7 @@ class ArticlesController < ApplicationController
 
     # Make sure we have the correct user.
     def correct_user
-      unless current_user.id == @article.user_id
+      unless current_user_is_admin? || current_user.id == @article.user_id
         flash[:danger] = 'Not authorized.'
         redirect_to users_path
       end

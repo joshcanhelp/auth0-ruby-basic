@@ -1,18 +1,6 @@
 <%= form_with(model: @article, local: true) do |form| %>
 
-  <% if @article.errors.any? %>
-  <div class="alert alert-danger">
-      <h4>
-        <%= pluralize(@article.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h4>
-      <ul>
-        <% @article.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-  </div>
-  <% end %>
+  <%= render 'shared/error_output', entity: @article %>
 
   <div class="form-group">
     <%= form.label :title, class: 'control-label' %>
@@ -26,7 +14,7 @@
 
   <div class="form-group">
     <%= link_to '← Cancel', articles_path, class: 'btn btn-default' %>
-    <%= form.submit '+ Save Changes', :class => 'btn btn-primary' %>
+    <%= form.submit submit_button_text, :class => 'btn btn-primary' %>
   </div>
 
 <% end %>

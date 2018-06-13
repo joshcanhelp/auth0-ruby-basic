@@ -6,10 +6,10 @@
   </h2>
   <h1>Auth0 ❤︎ Ruby</h1>
   <% if logged_in? %>
-  <%= link_to 'Log Out', logout_path, method: :delete, class: 'btn btn-success' %>
-  <%= link_to 'Profile', current_user, class: 'btn btn-success' %>
+    <%= link_to 'Log Out', logout_path, method: :delete, class: 'btn btn-success' %>
+    <%= link_to 'Profile', current_user, class: 'btn btn-success' %>
   <% else %>
-  <%= link_to 'Log In', login_path, class: 'btn btn-success' %>
-  <%= link_to 'Sign Up', signup_path, class: 'btn btn-success' %>
+    <%= link_to 'Log In', login_path, class: 'btn btn-success' %>
+    <%= link_to 'Sign Up', signup_path, class: 'btn btn-success' %>
   <% end %>
 </section>

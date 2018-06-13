@@ -2,13 +2,16 @@
 <% @articles.each do |article| %>
   <dl class="article--listing">
     <dt><%= article.title %></dt>
-    <dd><%= article.text %></dd>
-    <dd><%= link_to 'View →', article_path(article), class: 'btn btn-default btn-sm' %></dd>
+    <dd>
+      <strong>Posted:</strong>
+      <code><%= article.created_at.strftime("%B %e, %Y") %></code>
+    </dd>
+    <dd><%= render 'view_button', article: article %></dd>
   </dl>
 <% end %>
 <p>
-  <%= link_to '← Home', root_path, class: 'btn btn-default' %>
-  <% if current_user && current_user.is_author %>
-  <%= link_to '+ New', new_article_path, class: 'btn btn-primary' %>
+  <%= render 'shared/home_button' %>
+  <% if current_user_is_author? %>
+    <%= render 'shared/new_button', path: new_article_path %>
   <% end %>
 </p>

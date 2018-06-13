@@ -1,17 +1,6 @@
 <%= form_with(model: @user, local: true) do |form| %>
-  <% if @user.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>
-      <%= pluralize(@user.errors.count, "error") %>
-      prohibited this user from being saved:
-    </h4>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+
+  <%= render 'shared/error_output', entity: @user %>
 
   <div class="form-group">
     <%= form.label :name, class: 'control-label' %>
@@ -33,7 +22,7 @@
     <%= form.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control' %>
   </div>
 
-  <% if current_user && current_user.is_admin? %>
+  <% if current_user_is_admin? %>
     <div class="form-group">
       <%= form.label :auth0_id, 'Auth0 ID', class: 'control-label' %>
       <%= form.text_field :auth0_id, id: :user_auth0_id, class: 'form-control' %>
@@ -44,6 +33,6 @@
 
   <div class="form-group">
     <%= link_to '← Cancel', @user, class: 'btn btn-default' %>
-    <%= form.submit yield(:button_text), :class => 'btn btn-primary' %>
+    <%= form.submit submit_button_text, :class => 'btn btn-primary' %>
   </div>
 <% end %>

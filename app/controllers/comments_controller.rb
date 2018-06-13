@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
 
     # Make sure we have the correct user.
     def correct_user
-      unless current_user.is_admin || current_user.id == @comment.user_id
+      unless current_user_is_admin? || current_user.id == @comment.user_id
         flash[:danger] = 'Not authorized.'
         redirect_to users_path
       end

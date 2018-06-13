@@ -8,8 +8,8 @@
 <%= render 'comments' %>
 <p>
   <%= render 'index_button' %>
-  <% if current_user?(@author) %>
-    <%= render 'edit_button' %>
-    <%= render 'delete_button' %>
+  <% if current_user?(@author) || current_user_is_admin? %>
+    <%= render 'shared/edit_button', path: edit_article_path(@article) %>
+    <%= render 'shared/delete_button', path: article_path(@article) %>
   <% end %>
 </p>

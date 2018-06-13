@@ -1,5 +1,7 @@
 <% if current_user %>
+
   <p>Commenting as: <code><%= current_user.name%></code></p>
+  
   <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
     <div class="form-group">
       <%= form.label :body, 'Comment', class: 'control-label' %>

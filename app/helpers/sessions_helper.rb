@@ -40,6 +40,16 @@ module SessionsHelper
     user == current_user
   end
 
+  # Is the current user an admin?
+  def current_user_is_admin?
+    current_user && current_user.is_admin
+  end
+
+  # Is the current user an author?
+  def current_user_is_author?
+    current_user && current_user.is_author
+  end
+
   # Redirects back to a stored location or a default.
   def redirect_back_or(default)
     redirect_to session[:forwarding_url] || default

@@ -1,0 +1,13 @@
+<% if entity.errors.any? %>
+<div class="alert alert-danger">
+    <h4>
+      <%= pluralize(entity.errors.count, "error") %> prohibited
+      this article from being saved:
+    </h4>
+    <ul>
+      <% entity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+</div>
+<% end %>

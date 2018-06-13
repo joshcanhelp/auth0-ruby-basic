@@ -19,6 +19,6 @@
 <% end %>
 
 <p>
-  <%= link_to '← Home', root_path, class: 'btn btn-default' %>
-  <%= link_to '+ New', new_user_path, class: 'btn btn-primary' %>
+  <%= render 'shared/home_button' %>
+  <%= render 'shared/new_button', path: new_user_path %>
 </p>
