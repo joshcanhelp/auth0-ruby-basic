@@ -8,7 +8,7 @@ module UsersHelper
   end
 
   def get_username(user_id)
-    # TODO: cache me
+    # TODO: Is there a per-session cache?
     User.find_by(id: user_id).name
   end
 end

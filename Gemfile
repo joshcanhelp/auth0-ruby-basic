@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # https://github.com/bkeepers/dotenv
-# gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -49,10 +49,10 @@ gem 'will_paginate'
 
 # Use OmniAuth for authentication tasks
 gem 'omniauth', '~> 1.6.1'
-gem 'omniauth-auth0', '~> 2.0.0'
+gem 'omniauth-auth0'
 
 # Use Auth0 Ruby SDK for authentication
-gem 'auth0'
+gem 'auth0', :github => 'auth0/ruby-auth0'
 
 
 

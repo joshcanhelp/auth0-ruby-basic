@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/auth0/ruby-auth0.git
+  revision: 9f0090d4c9be6ecd91ef872835e89477e157062d
+  specs:
+    auth0 (4.4.0)
+      rest-client (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -42,8 +49,6 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
     arel (8.0.0)
-    auth0 (4.4.0)
-      rest-client (~> 2.0)
     bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
@@ -69,6 +74,10 @@ GEM
     crass (1.0.4)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.4.0)
+    dotenv-rails (2.4.0)
+      dotenv (= 2.4.0)
+      railties (>= 3.2, < 6.0)
     erubi (1.7.1)
     execjs (2.7.0)
     faker (1.8.7)
@@ -251,11 +260,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  auth0
+  auth0!
   bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  dotenv-rails
   faker
   guard
   guard-minitest
@@ -264,7 +274,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   omniauth (~> 1.6.1)
-  omniauth-auth0 (~> 2.0.0)
+  omniauth-auth0
   puma (~> 3.7)
   rails (~> 5.1.6)
   rails-controller-testing

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'admin/clients', to: 'auth0#clients'
+  get 'admin/connections', to: 'auth0#connections'
+  get 'admin/users', to: 'auth0#users'
+
   # Auth0
   namespace 'auth' do
     scope ':provider' do

@@ -1,15 +1,15 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
 
-  # TODO: store these in ENV
+  auth0_domain = ENV['AUTH0_RUBY_DOMAIN']
   provider(
     :auth0,
-    'tcuv7t39K1AbmLK4OEpJAdAfYLeEMgJF',
-    'y6DB0mOwJIaURVhF5xRA4oqh4_N-leN8N80XmjEXm_N_H27tppsB_eBkRwAzlsIG',
-    'joshc-test.auth0.com',
+    ENV['AUTH0_RUBY_CLIENT_ID'],
+    ENV['AUTH0_RUBY_CLIENT_SECRET'],
+    auth0_domain,
     callback_path: "/auth/auth0/callback",
     authorize_params: {
       scope: 'openid profile email',
-      audience: 'https://joshc-test.auth0.com/userinfo'
+      audience: "https://#{auth0_domain}/userinfo"
     }
   )
 end

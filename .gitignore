@@ -4,8 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore local Auth0 gem
+# Ignore local Auth0 and Omniauth-Auth0 gems
 /vendor/auth0/
+/vendor/omniauth-auth0/
 
 # Ignore bundler config.
 /.bundle
@@ -25,5 +26,8 @@
 
 .byebug_history
 
-# Ignore encrypted secrets key file.
+# Ignore secrets key files.
 config/secrets.yml.key
+
+# Ignore .env
+.env
