@@ -6,7 +6,7 @@ class Auth0Controller < ApplicationController
 
   def clients
     @params = {
-      fields: req_params.fetch('fields', 'name,client_id,app_type'),
+      fields: req_params.fetch('fields', ['name', 'client_id', 'app_type']),
       include_fields: req_params.fetch('include_fields', nil),
       page: req_params.fetch('page', nil),
       per_page: req_params.fetch('per_page', nil)
@@ -17,18 +17,34 @@ class Auth0Controller < ApplicationController
   def connections
     @params = {
       strategy: req_params.fetch('strategy', nil),
-      fields: req_params.fetch('fields', 'name,id,strategy'),
-      include_fields: req_params.fetch('include_fields', true),
+      fields: req_params.fetch('fields', ['name', 'id', 'strategy']),
+      include_fields: req_params.fetch('include_fields', nil),
       page: req_params.fetch('page', nil),
       per_page: req_params.fetch('per_page', nil)
     }
     @connections = @auth0.connections @params
   end
 
+  def users
+    @params = {
+      q: "email:#{entity_suffix}*",
+      fields: req_params.fetch('fields', 'email,user_id'),
+      include_fields: req_params.fetch('include_fields', true),
+      page: req_params.fetch('page', 0),
+      per_page: req_params.fetch('per_page', 100)
+    }
+    @users = @auth0.users @params
+  end
+
   #
   # START - Private methods
   #
   private
+
+    # Get the entity suffix for tests.
+    def entity_suffix
+      (ENV['TRAVIS_JOB_ID'] || ENV['TEST_ENTITY_SUFFIX'] || 'ruby').delete('_')
+    end
 
     # Require User params, whitelist incoming
     def req_params

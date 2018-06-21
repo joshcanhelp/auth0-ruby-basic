@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :set_api, only: [:destroy]
+
   def new
     redirect_to '/auth/auth0'
   end
@@ -19,6 +21,27 @@ class SessionsController < ApplicationController
   def destroy
     log_out if logged_in?
     flash[:success] = 'Logged out!';
-    redirect_to root_path
+    # redirect_to @auth0.logout_url(root_url).to_s
+    redirect_to root_url
   end
+
+  #
+  # START - Private methods
+  #
+  private
+
+    #
+    # START - Before filters
+    #
+
+    # Setup the Auth0 API connection.
+    def set_api
+      @auth0 = Auth0Client.new(
+        client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+        client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
+        token: ENV['AUTH0_RUBY_API_TOKEN'],
+        domain: ENV['AUTH0_RUBY_DOMAIN'],
+        api_version: 2
+      )
+    end
 end
