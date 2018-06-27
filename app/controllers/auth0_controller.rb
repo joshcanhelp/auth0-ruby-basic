@@ -25,17 +25,6 @@ class Auth0Controller < ApplicationController
     @connections = @auth0.connections @params
   end
 
-  def users
-    @params = {
-      q: "email:#{entity_suffix}*",
-      fields: req_params.fetch('fields', 'email,user_id'),
-      include_fields: req_params.fetch('include_fields', true),
-      page: req_params.fetch('page', 0),
-      per_page: req_params.fetch('per_page', 100)
-    }
-    @users = @auth0.users @params
-  end
-
   #
   # START - Private methods
   #
@@ -59,7 +48,6 @@ class Auth0Controller < ApplicationController
     def set_api
       @auth0 = Auth0Client.new(
         client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
-        client_secret: ENV['AUTH0_RUBY_CLIENT_SECRET'],
         token: ENV['AUTH0_RUBY_API_TOKEN'],
         domain: ENV['AUTH0_RUBY_DOMAIN'],
         api_version: 2

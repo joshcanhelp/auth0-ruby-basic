@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'admin/clients', to: 'auth0#clients'
-  get 'admin/connections', to: 'auth0#connections'
-  get 'admin/users', to: 'auth0#users'
+  # get 'admin/clients', to: 'auth0#clients'
+  # get 'admin/connections', to: 'auth0#connections'
+  # get 'admin/users', to: 'auth0#users'
+  get 'admin/users', to: 'all_users#index'
 
   # Auth0
   namespace 'auth' do
