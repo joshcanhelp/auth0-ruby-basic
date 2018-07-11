@@ -1,3 +1,5 @@
+require 'auth0'
+
 module SessionsHelper
 
   # Log the current user in.
@@ -65,5 +67,23 @@ module SessionsHelper
     state = SecureRandom.hex(24)
     session['omniauth.state'] = state
     state
+  end
+
+  # Returns a logout URL for Auth0
+  def auth0_logout_url
+    auth0_client.logout_url("#{root_url}", true).to_s
+  end
+
+  private
+
+  # Set the Auth0 API client
+  def auth0_client
+    @auth0_client ||= Auth0Client.new(
+      client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
+      token: ENV['AUTH0_RUBY_API_TOKEN'],
+      domain: ENV['AUTH0_RUBY_DOMAIN'],
+      api_version: 2,
+      timeout: 15 # optional, defaults to 10
+    )
   end
 end
