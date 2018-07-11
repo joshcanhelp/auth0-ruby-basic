@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/auth0/ruby-auth0.git
-  revision: 61b9a3e54a0a736663278b9dd8be5bfc1563563b
+  revision: 22ef4a296a896486f99da95e11ef76c1af835a76
   specs:
     auth0 (4.4.0)
       rest-client (~> 2.0)

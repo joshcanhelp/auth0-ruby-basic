@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
-  # get 'admin/clients', to: 'auth0#clients'
-  # get 'admin/connections', to: 'auth0#connections'
-  # get 'admin/users', to: 'auth0#users'
+  # Admin routes for SDK testing
+  # Separate to use as examples
   get 'admin/users', to: 'all_users#index'
+  get 'admin/rules', to: 'all_rules#index'
+  get 'admin/client-grants', to: 'all_client_grants#index'
+  get 'admin/connections', to: 'all_connections#index'
+  get 'admin/clients', to: 'all_clients#index'
 
   # Auth0
   namespace 'auth' do
@@ -15,9 +18,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'static_pages/home'
-  get 'static_pages/help'
-  get 'static_pages/about'
 
+  # Login auth routes
   get    '/signup',   to: 'sessions#new'
   get    '/login',   to: 'sessions#new'
   post    '/login',   to: 'sessions#create'

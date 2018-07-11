@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    render "show"
   end
 
   # GET /users/new
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    render "edit"
   end
 
   # POST /users
