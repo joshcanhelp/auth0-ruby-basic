@@ -2,7 +2,6 @@ require 'test_helper'
 require 'json'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-
   def setup
     @user = users(:one)
     @user2 = users(:two)
@@ -101,5 +100,4 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_redirected_to login_url
   end
-
 end

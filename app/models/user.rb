@@ -1,3 +1,4 @@
+# User Model
 class User < ApplicationRecord
   attr_accessor :remember_token
 
@@ -8,23 +9,23 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates :name,
-    presence: true,
-    length: { maximum: 50 }
+            presence: true,
+            length: { maximum: 50 }
 
   validates :email,
-    presence: true,
-    length: { maximum: 255 },
-    format: { with: VALID_EMAIL_REGEX },
-    uniqueness: { case_sensitive: false }
+            presence: true,
+            length: { maximum: 255 },
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
 
   validates :password,
-    presence: true,
-    length: { minimum: 8 },
-    allow_nil: true
+            presence: true,
+            length: { minimum: 8 },
+            allow_nil: true
 
   validates :auth0_id,
-    length: { maximum: 255 },
-    uniqueness: {allow_blank: true}
+            length: { maximum: 255 },
+            uniqueness: { allow_blank: true }
 
   # Remembers a user in the database for use in persistent sessions.
   def remember
@@ -45,12 +46,13 @@ class User < ApplicationRecord
 
   # Eigenclass methods
   class << self
-
     # Returns the hash digest of the given string.
     def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ?
-        BCrypt::Engine::MIN_COST :
-        BCrypt::Engine.cost
+      cost = if ActiveModel::SecurePassword.min_cost
+               BCrypt::Engine::MIN_COST
+             else
+               BCrypt::Engine.cost
+             end
       BCrypt::Password.create(string, cost: cost)
     end
 

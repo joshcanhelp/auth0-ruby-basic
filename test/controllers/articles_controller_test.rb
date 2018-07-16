@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
-
   def setup
     @article = articles(:one)
   end

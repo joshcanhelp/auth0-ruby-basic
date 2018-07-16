@@ -1,5 +1,4 @@
 require_relative 'boot'
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -7,11 +6,12 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module BasicRailsProject
+  # Application
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    # Settings in config/environments/* take precedence over those specified here.
+    # Settings in config/environments/* take precedence over osettings here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
   end

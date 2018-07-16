@@ -1,3 +1,5 @@
+# CreateUsers - create the users table.
+# rubocop:disable Metrics/MethodLength
 class CreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
@@ -16,3 +18,4 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     add_index :users, :auth0_id
   end
 end
+# rubocop:enable Metrics/MethodLength
