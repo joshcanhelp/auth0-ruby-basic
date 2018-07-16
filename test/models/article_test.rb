@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class ArticleTest < ActiveSupport::TestCase
-
   def setup
     @author = users(:one)
     @article = Article.new(
@@ -11,27 +10,27 @@ class ArticleTest < ActiveSupport::TestCase
     )
   end
 
-  test "should be valid" do
+  test 'should be valid' do
     assert @article.valid?
   end
 
-  test "title should be present" do
-    @article.title = "     "
+  test 'title should be present' do
+    @article.title = '     '
     assert_not @article.valid?
   end
 
-  test "title should not be too short" do
-    @article.title = "1234"
+  test 'title should not be too short' do
+    @article.title = '1234'
     assert_not @article.valid?
   end
 
-  test "text should be present" do
-    @article.text = "     "
+  test 'text should be present' do
+    @article.text = '     '
     assert_not @article.valid?
   end
 
-  test "text should not be too short" do
-    @article.text = "1234"
+  test 'text should not be too short' do
+    @article.text = '1234'
     assert_not @article.valid?
   end
 end

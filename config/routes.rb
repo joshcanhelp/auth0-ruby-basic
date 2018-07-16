@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Admin routes for SDK testing
   # Separate to use as examples
   get 'admin/users', to: 'all_users#index'
@@ -20,17 +19,16 @@ Rails.application.routes.draw do
   get 'static_pages/home'
 
   # Login auth routes
-  get    '/signup',   to: 'sessions#new'
-  get    '/login',   to: 'sessions#new'
-  post    '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
+  get    '/signup', to: 'sessions#new'
+  get    '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   # Users Resource
   resources :users
 
   # Articles Resource
   resources :articles do
-
     # Comments Resource
     resources :comments
   end

@@ -1,8 +1,10 @@
 # app/controllers/all_users_controllers.rb
 require 'auth0'
 
+# AdminController - extendable class for admin URLs.
+# Used to test Management API v2
 class AdminController < ApplicationController
-  before_action :is_admin
+  before_action :admin?
 
   private
 
@@ -18,11 +20,10 @@ class AdminController < ApplicationController
   end
 
   # Make sure we have an admin.
-  def is_admin
-    unless current_user_is_admin?
-      flash[:danger] = 'Not authorized.'
-      redirect_to root_path
-    end
+  def admin?
+    return if current_user_is_admin?
+    flash[:danger] = 'Not authorized.'
+    redirect_to root_path
   end
 
   # Whitelist parameters

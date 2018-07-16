@@ -1,6 +1,8 @@
 require 'auth0'
 
+# SessionsHelper - helpful functions for interacting with sessions.
 module SessionsHelper
+  # before_action :find_user, only: [:current_user]
 
   # Log the current user in.
   def log_in(user)
@@ -26,7 +28,7 @@ module SessionsHelper
 
   # Get the current user or none if not logged in
   def current_user
-    if user_id = session[:user_id]
+    if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
@@ -63,15 +65,19 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
 
+  # Method used by OmniAuth to store state.
+  # rubocop:disable Naming/AccessorMethodName
   def get_state
     state = SecureRandom.hex(24)
-    session['omniauth.state'] = state
+    session['omniauth.state'] = state + 'banana'
     state
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   # Returns a logout URL for Auth0
   def auth0_logout_url
-    auth0_client.logout_url("#{root_url}", true).to_s
+    # auth0_client.logout_url(root_url.to_s, include_client: true).to_s
+    auth0_client.logout_url(root_url.to_s).to_s
   end
 
   private

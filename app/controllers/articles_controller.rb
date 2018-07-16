@@ -1,7 +1,8 @@
+# ArticlesController - :articles resource controller.
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :correct_user]
-  before_action :is_author, only: [:new, :create, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_article, only: %i[show edit update destroy correct_user]
+  before_action :author?, only: %i[new create edit update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
 
   # GET /articles
   def index
@@ -21,9 +22,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-    render "edit"
+    render 'edit'
   end
-
 
   # POST /articles
   def create
@@ -59,34 +59,31 @@ class ArticlesController < ApplicationController
   #
   private
 
-    # Require and permit Article parameters
-    def article_params
-      params.require(:article).permit(:title, :text)
-    end
+  # Require and permit Article parameters
+  def article_params
+    params.require(:article).permit(:title, :text)
+  end
 
-    #
-    # START - Before filters
-    #
+  #
+  # START - Before filters
+  #
 
-    # Set the article we're working on.
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  # Set the article we're working on.
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
-    # Make sure we have an author.
-    def is_author
-      unless logged_in? && current_user_is_author?
-        flash[:danger] = 'Not authorized.'
-        redirect_to articles_url
-      end
-    end
+  # Make sure we have an author.
+  def author?
+    return if logged_in? && current_user_is_author?
+    flash[:danger] = 'Not authorized.'
+    redirect_to articles_url
+  end
 
-    # Make sure we have the correct user.
-    def correct_user
-      unless current_user_is_admin? || current_user.id == @article.user_id
-        flash[:danger] = 'Not authorized.'
-        redirect_to users_path
-      end
-    end
-
+  # Make sure we have the correct user.
+  def correct_user
+    return if current_user_is_admin? || current_user.id == @article.user_id
+    flash[:danger] = 'Not authorized.'
+    redirect_to users_path
+  end
 end

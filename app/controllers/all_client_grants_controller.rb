@@ -1,16 +1,17 @@
 # app/controllers/all_users_controllers.rb
 require 'auth0'
 
+# AllClientGrantsController - admin URLs to get all Client Grants
+# Used to test Management API v2
 class AllClientGrantsController < AdminController
-
   # Get all users from Auth0 with "auth0" in their email.
   def index
     @params = {
       page: 0,
-      per_page: 2,
+      per_page: 2
     }
     @results = auth0_client.client_grants @params
     @page_title = 'Client Grants'
-    render "admin/api_results"
+    render 'admin/api_results'
   end
 end
