@@ -2,16 +2,17 @@
 
 <h2>Basic</h2>
 <p>
-  <%= link_to 'All Articles →',
+  <%= link_to 'All Articles',
         {controller: 'articles', action: 'index'},
         class: 'btn btn-default' %>
-  <%= link_to 'All Users →', users_path, class: 'btn btn-default' %>
+  <%= link_to 'All Users', users_path, class: 'btn btn-default' %>
+  <%= link_to 'Lock', 'static_pages/lock', class: 'btn btn-default' %>
 </p>
 <h2>Admin</h2>
 <p>
-  <%= link_to 'Users →', '/admin/users', class: 'btn btn-default' %>
-  <%= link_to 'Client Grants →', '/admin/client-grants', class: 'btn btn-default' %>
-  <%= link_to 'Rules →', '/admin/rules', class: 'btn btn-default' %>
-  <%= link_to 'Clients →', '/admin/clients', class: 'btn btn-default' %>
-  <%= link_to 'Connections →', '/admin/connections', class: 'btn btn-default' %>
+  <%= link_to 'Users', '/admin/users', class: 'btn btn-default' %>
+  <%= link_to 'Client Grants', '/admin/client-grants', class: 'btn btn-default' %>
+  <%= link_to 'Rules', '/admin/rules', class: 'btn btn-default' %>
+  <%= link_to 'Clients', '/admin/clients', class: 'btn btn-default' %>
+  <%= link_to 'Connections', '/admin/connections', class: 'btn btn-default' %>
 </p>

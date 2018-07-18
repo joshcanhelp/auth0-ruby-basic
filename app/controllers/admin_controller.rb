@@ -10,10 +10,14 @@ class AdminController < ApplicationController
 
   # Set the Auth0 API client
   def auth0_client
+    @client_id = ENV['AUTH0_RUBY_CLIENT_ID']
+    @client_secret = ENV['AUTH0_RUBY_CLIENT_SECRET']
+    @domain = ENV['AUTH0_RUBY_DOMAIN']
+
     @auth0_client ||= Auth0Client.new(
-      client_id: ENV['AUTH0_RUBY_CLIENT_ID'],
       token: ENV['AUTH0_RUBY_API_TOKEN'],
-      domain: ENV['AUTH0_RUBY_DOMAIN'],
+      client_id: @client_id,
+      domain: @domain,
       api_version: 2,
       timeout: 15 # optional, defaults to 10
     )

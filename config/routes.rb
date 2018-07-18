@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'static_pages/home'
+  get 'static_pages/lock'
 
   # Login auth routes
   get    '/signup', to: 'sessions#new'

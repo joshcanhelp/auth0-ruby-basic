@@ -1,0 +1,37 @@
+<h1>Lock</h1>
+
+<div id="auth0-login-form"></div>
+
+<script src="https://cdn.auth0.com/js/lock/11.7.2/lock.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+  var loginForm = $( '#auth0-login-form' );
+  var clientId = '<%= @client_id %>';
+  var domain = '<%= @domain %>';
+  var showAsModal = true;
+
+  var Lock = new Auth0Lock( clientId, domain, {
+    'auth' : {
+      'responseType' : 'code',
+      'redirectUrl' : 'http://localhost:3000/auth/auth0/callback',
+      'params' : {
+        'state' : '<%= @state %>'
+      }
+    }
+  } );
+
+  // Check if we're showing as a modal, can be used in shortcodes and widgets
+  if ( showAsModal ) {
+      $( '<button>' )
+          .text( 'Login' )
+          .attr( 'id', 'a0LoginButton' )
+          .insertAfter( loginForm )
+          .click( function () {
+              Lock.show();
+          } );
+  } else {
+      Lock.show();
+  }
+});
+</script>

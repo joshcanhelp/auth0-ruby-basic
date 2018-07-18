@@ -50,7 +50,7 @@ gem 'will_paginate'
 
 # Use OmniAuth for authentication tasks
 gem 'omniauth', '~> 1.6.1'
-gem 'omniauth-auth0'
+gem 'omniauth-auth0', github: 'auth0/omniauth-auth0'
 
 # Use Auth0 Ruby SDK for authentication
 gem 'auth0', github: 'auth0/ruby-auth0'

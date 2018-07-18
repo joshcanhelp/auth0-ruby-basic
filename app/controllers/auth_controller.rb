@@ -6,9 +6,9 @@ class AuthController < ApplicationController
 
   def callback
     # User does not have an existing auth0_id, associate and login!
-    if user.auth0_id.nil?
-      user.auth0_id = auth0_id
-      user.save
+    if @user.auth0_id.nil?
+      @user.auth0_id = @auth0_id
+      @user.save
       return login_and_redirect user
     end
 
@@ -32,22 +32,22 @@ class AuthController < ApplicationController
     @userinfo = session[:userinfo] = request.env['omniauth.auth']
 
     # No email address, reject
-    return login_failed 'Email required.' unless userinfo[:info][:email]
+    return login_failed 'Email required.' unless @userinfo[:info][:email]
 
-    @auth0_id = userinfo[:uid]
+    @auth0_id = @userinfo[:uid]
   end
 
   # This stores all the user information that came from Auth0 and the IdP
   def user?
-    @user = User.find_by(email: userinfo[:info][:email]) if userinfo
+    @user = User.find_by(email: @userinfo[:info][:email]) if @userinfo
 
     # No user with that email so create the user with auth0_id.
-    return create_user_and_login userinfo if user.nil?
+    return create_user_and_login @userinfo if @user.nil?
   end
 
   def user_login?
     # Existing auth0_id matches, login!
-    return login_and_redirect user if user.auth0_id == auth0_id
+    return login_and_redirect @user if @user.auth0_id == @auth0_id
   end
 
   # Create new user from returned userinfo.
