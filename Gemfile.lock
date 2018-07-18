@@ -3,7 +3,7 @@ GIT
   revision: 488b8d571633ce8fa29de1ffaf670da6601ca6a3
   specs:
     omniauth-auth0 (2.0.0)
-      omniauth-oauth2 (~> 1.4)
+      omniauth-oauth2 (~> 1.5)
 
 GIT
   remote: https://github.com/auth0/ruby-auth0.git
@@ -114,6 +114,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    jaro_winkler (1.5.1)
     jaro_winkler (1.5.1-x86_64-darwin-17)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
