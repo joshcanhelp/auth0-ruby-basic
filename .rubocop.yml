@@ -1,2 +1,7 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+
 Style/FrozenStringLiteralComment:
   Enabled: false
