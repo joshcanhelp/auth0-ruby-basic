@@ -69,7 +69,7 @@ module SessionsHelper
   # rubocop:disable Naming/AccessorMethodName
   def get_state
     state = SecureRandom.hex(24)
-    session['omniauth.state'] = state + 'banana'
+    session['omniauth.state'] = state
     state
   end
   # rubocop:enable Naming/AccessorMethodName
