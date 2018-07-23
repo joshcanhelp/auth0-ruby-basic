@@ -1,3 +1,5 @@
+require('pp')
+
 # AuthController - handles OmniAuth callback URLs.
 class AuthController < ApplicationController
   before_action :userinfo?, only: [:callback]
@@ -6,9 +8,9 @@ class AuthController < ApplicationController
 
   def callback
     # User does not have an existing auth0_id, associate and login!
-    if @user.auth0_id.nil?
-      @user.auth0_id = @auth0_id
-      @user.save
+    if user.auth0_id.nil?
+      user.auth0_id = auth0_id
+      user.save
       return login_and_redirect user
     end
 
@@ -29,17 +31,18 @@ class AuthController < ApplicationController
 
   # This stores all the user information that came from Auth0 and the IdP
   def userinfo?
-    @userinfo = session[:userinfo] = request.env['omniauth.auth']
+    @userinfo = session[:userinfo]
 
     # No email address, reject
-    return login_failed 'Email required.' unless @userinfo[:info][:email]
+    return login_failed 'Email required.' unless @userinfo['info']['email']
 
-    @auth0_id = @userinfo[:uid]
+    @email = @userinfo['info']['email']
+    @auth0_id = @userinfo['uid']
   end
 
   # This stores all the user information that came from Auth0 and the IdP
   def user?
-    @user = User.find_by(email: @userinfo[:info][:email]) if @userinfo
+    @user = User.find_by(email: @email) if @userinfo
 
     # No user with that email so create the user with auth0_id.
     return create_user_and_login @userinfo if @user.nil?
@@ -52,11 +55,11 @@ class AuthController < ApplicationController
 
   # Create new user from returned userinfo.
   def create_user_and_login(userinfo)
-    nickname = userinfo[:info][:nickname]
+    nickname = userinfo['info']['nickname']
     user = User.new(
-      name: nickname.nil? ? userinfo[:info][:name] : nickname,
-      email: userinfo[:info][:email],
-      auth0_id: userinfo[:uid]
+      name: nickname.nil? ? userinfo['info']['name'] : nickname,
+      email: @email,
+      auth0_id: @auth0_id
     )
     user.save
     login_and_redirect user
