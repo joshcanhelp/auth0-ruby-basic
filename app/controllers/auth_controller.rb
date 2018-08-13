@@ -7,6 +7,7 @@ class AuthController < ApplicationController
   before_action :user_login?, only: [:callback]
 
   def callback
+
     # User does not have an existing auth0_id, associate and login!
     if user.auth0_id.nil?
       user.auth0_id = auth0_id
@@ -31,7 +32,7 @@ class AuthController < ApplicationController
 
   # This stores all the user information that came from Auth0 and the IdP
   def userinfo?
-    @userinfo = session[:userinfo]
+    @userinfo = session[:userinfo] = request.env['omniauth.auth']
 
     # No email address, reject
     return login_failed 'Email required.' unless @userinfo['info']['email']
