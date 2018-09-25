@@ -65,15 +65,6 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
 
-  # Method used by OmniAuth to store state.
-  # rubocop:disable Naming/AccessorMethodName
-  def get_state
-    state = SecureRandom.hex(24)
-    session['omniauth.state'] = state
-    state
-  end
-  # rubocop:enable Naming/AccessorMethodName
-
   # Returns a logout URL for Auth0
   def auth0_logout_url
     # auth0_client.logout_url(root_url.to_s, include_client: true).to_s

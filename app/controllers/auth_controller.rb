@@ -46,12 +46,12 @@ class AuthController < ApplicationController
     @user = User.find_by(email: @email) if @userinfo
 
     # No user with that email so create the user with auth0_id.
-    return create_user_and_login @userinfo if @user.nil?
+    create_user_and_login @userinfo if @user.nil?
   end
 
   def user_login?
     # Existing auth0_id matches, login!
-    return login_and_redirect @user if @user.auth0_id == @auth0_id
+    login_and_redirect @user if @user.auth0_id == @auth0_id
   end
 
   # Create new user from returned userinfo.
@@ -70,7 +70,7 @@ class AuthController < ApplicationController
   def login_and_redirect(user)
     log_in user
     flash[:success] = 'Logged in with Auth0!'
-    redirect_back_or users_path
+    redirect_back_or user
   end
 
   # Redirect a failed login to the homepage with a flash message.

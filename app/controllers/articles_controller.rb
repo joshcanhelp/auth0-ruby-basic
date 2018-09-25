@@ -1,4 +1,7 @@
 # ArticlesController - :articles resource controller.
+#
+require 'auth0'
+
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy correct_user]
   before_action :author?, only: %i[new create edit update destroy]

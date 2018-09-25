@@ -1,19 +1,27 @@
 <% if notice %>
-    <div class="alert alert-success"><%= notice %></div>
+  <div class="alert alert-success"><%= notice %></div>
 <% end %>
 
 <h1><%= gravatar_for @user, size: 80 %> <%= @user.name %></h1>
 
 <p>
   <strong>Email:</strong> <%= @user.email %>
-  <% if !@user.auth0_id.blank? %>
-  <br><strong>Auth0:</strong> <%= @user.auth0_id %>
+  <% if @user.auth0_id %>
+    <br><strong>Auth0:</strong> <%= @user.auth0_id %>
   <% end %>
 </p>
 
-<hr>
-<p>
-  <% if current_user %>
+<% if current_user %>
+  <hr>
+  <% if current_user?(@user) %>
+    <h3>ID Token:</h3>
+    <pre><%= JSON.pretty_generate(@id_token) %></pre>
+    <hr>
+    <h3>Userinfo:</h3>
+    <pre><%= JSON.pretty_generate(session[:userinfo]) %></pre>
+    <hr>
+  <% end %>
+  <p>
     <%= render 'index_button' %>
 
     <% if current_user_is_admin? || current_user?(@user) %>
@@ -23,6 +31,5 @@
     <% if current_user_is_admin? && !current_user?(@user) %>
       <%= render 'shared/delete_button', path: user_path(@user) %>
     <% end %>
-
-  <% end %>
-</p>
+  </p>
+<% end %>
