@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
-  get 'static_pages/home'
-  get 'static_pages/lock'
+  get '/lock', to: 'static_pages#lock'
+
+  get '/login-ro', to: 'static_pages#login_ro'
+  post '/login-ro', to: 'static_pages#process_login_ro'
 
   # Login auth routes
   get    '/signup', to: 'sessions#new'

@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/auth0/ruby-auth0.git
-  revision: 7349a4135a38675955b5852c3bcc8216359c4cee
+  revision: b7acfc0b02506785d29b71ea5ef423cd9b336d53
   specs:
     auth0 (4.5.0)
       rest-client (~> 2.0)
@@ -311,4 +311,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
