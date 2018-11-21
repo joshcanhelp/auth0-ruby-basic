@@ -21,7 +21,7 @@ module SessionsHelper
     @current_user = nil
   end
 
-  # Is the corrent user logged in?
+  # Is the current user logged in?
   def logged_in?
     !current_user.nil?
   end

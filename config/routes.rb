@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Admin routes for SDK testing
   # Separate to use as examples
   get 'admin/users', to: 'all_users#index'
+  post 'admin/users', to: 'all_users#update'
   get 'admin/rules', to: 'all_rules#index'
   get 'admin/client-grants', to: 'all_client_grants#index'
   get 'admin/connections', to: 'all_connections#index'
@@ -22,7 +23,8 @@ Rails.application.routes.draw do
   # Login auth routes
   get    '/signup', to: 'sessions#new'
   get    '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
+  get    '/auth0-callback', to: 'sessions#callback'
+  post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
   # Users Resource

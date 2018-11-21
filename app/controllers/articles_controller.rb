@@ -57,9 +57,6 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
-  #
-  # START - Private methods
-  #
   private
 
   # Require and permit Article parameters

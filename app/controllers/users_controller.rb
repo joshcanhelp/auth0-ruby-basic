@@ -1,5 +1,6 @@
 require 'json'
 require 'omniauth/auth0/jwt_validator'
+require 'auth0'
 
 # UsersController - :users resource controller.
 class UsersController < ApplicationController

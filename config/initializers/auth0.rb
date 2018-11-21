@@ -7,8 +7,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     auth0_domain,
     callback_path: '/auth/auth0/callback',
     authorize_params: {
-      scope: 'openid profile email',
-      audience: "https://#{auth0_domain}/userinfo"
+      scope: 'openid profile email'
     }
   )
 end

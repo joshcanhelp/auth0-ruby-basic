@@ -15,14 +15,15 @@ class AdminController < ApplicationController
     @domain = ENV['AUTH0_RUBY_DOMAIN']
 
     @auth0_client ||= Auth0::Client.new(
-      # token: ENV['AUTH0_RUBY_API_TOKEN'],
-      # access_token: ENV['AUTH0_RUBY_API_TOKEN'],
+      token: ENV['AUTH0_RUBY_API_TOKEN'],
       client_id: @client_id,
       client_secret: @client_secret,
-      domain: @domain,
-      api_version: 2,
-      timeout: 15
+      domain: @domain
     )
+
+    # abort @auth0_client.saml_metadata.inspect
+    # abort @auth0_client.userinfo(session[:userinfo]['credentials']['token']).inspect
+    # abort result.inspect
   end
 
   # Make sure we have an admin.
