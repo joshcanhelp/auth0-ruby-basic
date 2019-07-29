@@ -1,4 +1,3 @@
-require 'omniauth/auth0/jwt_validator'
 require 'auth0'
 
 # SessionsController - login and logout controller.
@@ -8,49 +7,36 @@ class SessionsController < ApplicationController
   before_action :find_user, only: [:create]
   before_action :auth0_data, only: [:new, :callback]
 
-  # Redirect to OmniAuth login flow.
+  # Ruby SDK auth flow
   def new
-    redirect_to '/auth/auth0'
+    extend Auth0::Api::AuthenticationEndpoints
+    options = {
+      scope: 'openid email offline_access',
+      state: SecureRandom.hex(16)
+    }
+    session[:auth0_state] = options[:state]
+    redirect_to authorization_url(callback_url, options).to_s
   end
 
-  # Ruby SDK auth flow
-  # def new
-  #   extend Auth0::Api::AuthenticationEndpoints
-  #   options = {
-  #     scope: 'openid email offline_access',
-  #     state: SecureRandom.hex(16)
-  #   }
-  #   session[:auth0_state] = options[:state]
-  #   redirect_to authorization_url(callback_url, options).to_s
-  # end
+  def callback
+    extend Auth0::Api::AuthenticationEndpoints
+    extend Auth0::Mixins::HTTPProxy
 
-  # Ryby SDK callback
-  # def callback
-  #   extend Auth0::Api::AuthenticationEndpoints
-  #   extend Auth0::Mixins::HTTPProxy
-  #
-  #   query_hash = Rack::Utils.parse_nested_query(request.query_string)
-  #   raise RuntimeError, 'No state param found' if query_hash['state'].nil?
-  #   raise RuntimeError, 'Invalid state' if query_hash['state'] != session[:auth0_state]
-  #   raise RuntimeError, 'No auth code param found' if query_hash['code'].nil?
-  #
-  #   session.delete(:auth0_state)
-  #   token = auth_code_exchange(
-  #     query_hash['code'],
-  #     callback_url,
-  #     client_id: @client_id,
-  #     client_secret: @client_secret
-  #   )
-  #
-  #   options = Struct.new(:domain, :client_id, :client_secret)
-  #   jwt_decode = OmniAuth::Auth0::JWTValidator.new(options.new(
-  #     @domain,
-  #     @client_id,
-  #     @client_secret
-  #   ))
-  #
-  #   abort jwt_decode.decode(token.id_token).inspect
-  # end
+    query_hash = Rack::Utils.parse_nested_query(request.query_string)
+    raise RuntimeError, 'No state param found' if query_hash['state'].nil?
+    raise RuntimeError, 'Invalid state' if query_hash['state'] != session[:auth0_state]
+    raise RuntimeError, 'No auth code param found' if query_hash['code'].nil?
+
+    session.delete(:auth0_state)
+    token = exchange_auth_code_for_tokens(
+      query_hash['code'],
+      redirect_uri: callback_url,
+      client_id: @client_id,
+      client_secret: @client_secret
+    )
+
+    abort token.inspect
+  end
 
   def create
     if !user || !user.authenticate(params[:session][:password])

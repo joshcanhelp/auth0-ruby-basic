@@ -19,16 +19,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @id_token = session[:userinfo]['credentials']['id_token']
-    if current_user?(@user)
-      options = Struct.new(:domain, :client_id, :client_secret)
-      auth0_jwt = OmniAuth::Auth0::JWTValidator.new(options.new(
-          ENV['AUTH0_RUBY_DOMAIN'],
-          ENV['AUTH0_RUBY_CLIENT_ID'],
-          ENV['AUTH0_RUBY_CLIENT_SECRET']
-      ))
-      @id_token = auth0_jwt.decode(@id_token)
-    end
     render 'show'
   end
 

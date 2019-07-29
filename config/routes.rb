@@ -8,14 +8,6 @@ Rails.application.routes.draw do
   get 'admin/connections', to: 'all_connections#index'
   get 'admin/clients', to: 'all_clients#index'
 
-  # Auth0
-  namespace 'auth' do
-    scope ':provider' do
-      get 'callback'
-      get 'failure'
-    end
-  end
-
   root 'static_pages#home'
   get '/lock', to: 'static_pages#lock'
 

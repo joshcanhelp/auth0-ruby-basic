@@ -6,7 +6,6 @@
     <% end %>
   </h2>
   <h1>Auth0 ❤︎ Ruby</h1>
-  <p><%= session['omniauth.state'] %></p>
   <% if logged_in? %>
     <%= link_to 'Log Out', logout_url, method: 'delete', class: 'btn btn-success' %>
     <%= link_to 'Profile', current_user, class: 'btn btn-success' %>
